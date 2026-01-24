@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>雅思单词学习</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", Arial, sans-serif;
+      margin: 0;
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 18px 10px;
+      font-size: 18px;
+      text-align: center;
+      word-break: break-word;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: 600;
+    }
+
+    th:nth-child(1),
+    td:nth-child(1),
+    th:nth-child(2),
+    td:nth-child(2) {
+      width: 50%;
+    }
+
+    td.clickable {
+      cursor: pointer;
+      background-color: #fafafa;
+    }
+
+    td.hidden {
+      color: transparent;
+    }
+
+    td.hidden::after {
+      content: "点击显示";
+      color: #999;
+      font-size: 14px;
+    }
+
+    /* 底部按钮 */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px 0;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      background: #07c160; /* 微信绿 */
+      color: #fff;
+    }
+
+    button:active {
+      opacity: 0.85;
+    }
+
+    .counter {
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="counter" id="counter"></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>单词</th>
+      <th>雅思常见替换词</th>
+    </tr>
+  </thead>
+  <tbody id="wordTable"></tbody>
+</table>
+
+<div class="controls">
+  <button onclick="prevWord()">上一个</button>
+  <button onclick="nextWord()">下一个</button>
+</div>
+
+<script>
+  const words = [
+    
+["cue", "hint, clue", "线索"],
+["retain", "maintain", "记住"],
+["expertise", "knowledge, skill", "专门技术"],
+["distinguish", "separate, differentiate", ".区别，辨别"],
+["conservative", "traditional", "保守的"],
+["budget", "fund, financial", "预算"],
+["assign", "allocate", "分配，指派"],
+["allergic", "irritate", "过敏的；对……极讨厌的"],
+["curb", "restrict", "限制，抑制"],
+["confuse", "puzzle", "使混乱，使迷惑"],
+["erode", "rust, damage", "侵蚀"],
+["boundary", "barrier", "边界；底线"],
+["conceal", "hide", "隐藏；隐瞒"],
+["catastrophic", "disastrous", "灾难的"],
+["commute", "travel", "通勤；用……交换"],
+["crash", "collapse", "碰撞"],
+["bungle", "mishandle", "搞糟，拙劣地工作"],
+["array", "order", "排列，大批"],
+["credibility", "reliance", "可信性"],
+["demographic", "population statistic", "人口统计学的；人口学"],
+["addictive", "habit", "上瘾的"],
+["communal", "public", "公共的，公社的"],
+["comment", "remark", "n.评论；意见 v.评论"],
+["trait", "characteristic, feature, property", "特性，特征"],
+["concentrate", "focus", "专心于；集中"],
+["considerable", "significant", "相当大的，重要的"],
+["innate", "built-in, inborn", "天生的；内在的，直觉的"],
+["isolate", "inaccessible", "使隔离，使孤立"],
+["enormous", "massive, large", "庞大的,巨大的"],
+["contingent", "uncertain", "因情况而异的"],
+["be liable to", "potential", "易于……"],
+["dental", "teeth", "牙科的，牙齿的"],
+["coin", "first used, invent", "创造"],
+["depression", "frustration", "抑郁，沮丧"],
+["co-ordinate", "organize, harmonize", "使……协调"],
+["conflict", "unharmonious", "冲突，矛盾"],
+["blight", "destroy", "损害；枯萎"],
+["accumulate", "gather", "积累，积聚"],
+["commitment", "engagement", "承诺，许诺，义务；致力"],
+["controversial", "disputable", "有争论的"],
+["grant", "offer", "拨款；授予"],
+["be subject to", "face", "受…...支配,受…...限制"],
+["integrate", "combine, whole", "使……成整体"],
+["underlie", "based on, ground, root", "成为……基础"],
+["crisis", "risk", "危机"],
+["delay", "postpone", "延期，耽搁"],
+["altitude", "height", "高度，海拔"],
+["cognitive", "mental", "认知的"],
+["curriculum", "syllabus, course of study", "课程"],
+["criticism", "condemn", "评论"],
+["settle", "fix", "解决；定居，稳定"],
+["compensate", "make up, offset", "补偿，赔偿"],
+["confer", "grant", "授予，给予"],
+["prompt", "initiate, immediately", "促进，激起"],
+["agreeable", "pleasant", "令人愉快的；合适的；和蔼可亲的"],
+["consult", "ask for advice", "查阅,商量,请教,"],
+["authority", "government", "当局，权威"],
+["attitude", "opinion", "看法，态度"],
+["calamity", "disaster", "灾难"],
+["damp", "wet", "潮湿的"],
+["cater", "serve", "迎合；满足需求"],
+["adversity", "troublw", "逆境，不幸"],
+["domestic", "home, local, national", "家庭的；国内的"],
+["concur", "agree", "同意"],
+["be consistent with", "compatible", "与……一致"],
+["correlation", "link", "相关，关联"],
+["confidential", "undisclosed, secret, hidden", "机密的,秘密的"],
+["designate", "appoint", "指定；指派，标出"],
+["feasible", "realistic, viable", "可行的"],
+["certify", "verify", "证明,保证"],
+["democratic", "republic", "民主的"],
+["aid", "help", "援助，帮助"],
+["aggression", "attack", "侵犯，侵害"],
+["fragile", "vulnerable", "脆弱的"],
+["resmble", "like,look,like,be similar to", "像，与……相似"],
+["compare", "contrast", "与……相比较"],
+["induce", "cause, lead to", "引起，引诱"],
+["civic", "municipal", "市民的"],
+["vanish", "disappear", "消失，绝迹"],
+["emphasize", "focus on, stress", ".强调，着重"],
+["detain", "hold", ".留住"],
+["dazzle", "flash", "使目眩；使……眼花"],
+["burden", "load", "负担"],
+["halt", "stop, quit", "停止"],
+
+  ];
+
+  let index = 0;
+  const table = document.getElementById("wordTable");
+  const counter = document.getElementById("counter");
+
+  function render() {
+    table.innerHTML = "";
+
+    const tr = document.createElement("tr");
+
+    const wordTd = document.createElement("td");
+    wordTd.textContent = words[index][0];
+
+    const replaceTd = document.createElement("td");
+    replaceTd.textContent = words[index][1];
+    replaceTd.className = "clickable hidden";
+    replaceTd.onclick = () => replaceTd.classList.remove("hidden");
+
+    tr.appendChild(wordTd);
+    tr.appendChild(replaceTd);
+    table.appendChild(tr);
+
+    counter.textContent = `第 ${index + 1} / ${words.length} 个`;
+  }
+
+  function nextWord() {
+    if (index < words.length - 1) {
+      index++;
+      render();
+    }
+  }
+
+  function prevWord() {
+    if (index > 0) {
+      index--;
+      render();
+    }
+  }
+
+  render();
+</script>
+
+</body>
+</html>
