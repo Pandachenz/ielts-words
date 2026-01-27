@@ -10,9 +10,10 @@
       font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", Arial, sans-serif;
       margin: 0;
       padding: 16px;
-      padding-top: 250px;    /* 给上图留空间 */
-      padding-bottom: 250px; /* 给下图留空间 */
-      background: #ffffff6e;
+      padding-top: 250px;
+      padding-bottom: 250px;
+      background: #1f1f1f;
+      color: #f5f5f5;
     }
 
     body::before {
@@ -26,7 +27,7 @@
       background-size: cover;
       z-index: -1;
     }
-    
+
     body::after {
       content: "";
       position: fixed;
@@ -39,32 +40,28 @@
       z-index: -1;
     }
 
-
-
-
     table {
       width: 100%;
       border-collapse: collapse;
       table-layout: fixed;
       margin-bottom: 20px;
+      background: #2a2a2a;
+      border-radius: 8px;
+      overflow: hidden;
     }
 
     th, td {
-      border: 1px solid #ddd;
+      border: 1px solid #3a3a3a;
       padding: 18px 10px;
       font-size: 18px;
       text-align: center;
       word-break: break-word;
     }
 
-    td.clickable {
-      color: #e60012; /* 红色 */
-    }
-
-
     th {
-      background-color: #f2f2f2;
+      background-color: #333;
       font-weight: 600;
+      color: #ffffff;
     }
 
     th:nth-child(1),
@@ -76,7 +73,8 @@
 
     td.clickable {
       cursor: pointer;
-      background-color: #fafafa;
+      background-color: #262626;
+      color: #ff6b6b;
     }
 
     td.hidden {
@@ -89,7 +87,6 @@
       font-size: 14px;
     }
 
-    /* 底部按钮 */
     .controls {
       display: flex;
       justify-content: space-between;
@@ -102,7 +99,7 @@
       font-size: 16px;
       border-radius: 8px;
       border: none;
-      background: #07c160; /* 微信绿 */
+      background:#2f80ed;
       color: #fff;
     }
 
@@ -113,7 +110,7 @@
     .counter {
       text-align: center;
       font-size: 14px;
-      color: #888;
+      color: #aaa;
       margin-bottom: 10px;
     }
   </style>
@@ -140,131 +137,183 @@
 
 <script>
   const words = [
-["obligation", "responsibility", "义务"],
-["refer to", "talk about", "指(的是)，涉及，提及"],
-["visual", "image", "视觉的"],
-["responsible", "liable", "负责的，可靠的；有责任的"],
-["ethical", "moral", "道德的"],
-["notoriety", "famous", "名声"],
-["prolong", "extend", "拉长，延长"],
-["equator", "geography", "赤道"],
-["tremendous", "vast", "巨大的，惊人的"],
-["stride", "progress", "进展"],
-["versatile", "all-around", "多功能"],
-["monitor", "surveillance", "监控"],
-["offensive", "hostile", "冒犯的，无礼的"],
-["trigger", "begin", "触发，引发，引起"],
-["substance", "matter", "物质；实质"],
-["recreation", "entertainment", "娱乐，消遣"],
-["estate", "property", "房地产"],
-["unbiased", "fair", "公正的，无偏见的"],
-["lopsided", "uneven", "不平衡的"],
-["revision", "editing", "修正"],
-["well-being", "health", "健康，康乐"],
-["shade", "shelter", "遮阳；阴影"],
-["reluctant", "unwilling", "不情愿的"],
-["patient", "repetitive", "有耐性的，能容忍的n.病人；患者"],
-["revive", "renaissance", "使复苏，恢复"],
-["trace", "track", "追溯；痕迹"],
-["promote", "improve", "促进，推销"],
-["suspicious", "odd", "可疑的"],
-["subdivide", "break down", "把……细分"],
-["display", "show", "显示"],
-["rare", "unusual", "稀有的"],
-["solely", "alone", "唯一地"],
-["plagiarise", "copy", "抄袭"],
-["ordinary", "common", "普通的；平凡的；平常的"],
-["tension", "upset", "紧张，不安"],
-["organ", "a part of a body", "器官；机构"],
-["pose", "cause", "提出，造成，形成"],
-["private", "personal", "私人的；私有的；私下的"],
-["obscure", "hide", "掩盖，使模糊不清"],
-["sustainable", "long-term", "可持续的"],
-["term", "word", "术语"],
-["norm", "regulation", "规范"],
-["soar", "increase", "激增"],
-["skepticism", "doubt", "怀疑"],
-["enormous", "massive, large", "庞大的,巨大的"],
-["predict", "expect", "预测，预知"],
-["visible", "see", "明显的，看得见的"],
-["sufficiency", "enough", "足量，充足"],
-["official", "authority", "官员,官方的"],
-["prohibit", "not allowed", "禁止的"],
-["innate", "built-in, inborn", "天生的；内在的，直觉的"],
-["tropical", "hot", "热带的"],
-["plenty of", "many", "大量的"],
-["nocturnal", "night", "夜间的,夜间发生的"],
-["cognitive", "mental", "认知的"],
-["overtake", "surpass", "赶上"],
-["phase", "process", "阶段"],
-["subtle", "delicate", "微妙的"],
-["range", "scope", "范围；幅度"],
-["mould", "form", "模压，塑造；塑造成"],
-["uniform", "consistent", "始终如一的"],
-["throughout", "anywhere", "自始至终，到处；全部"],
-["plot", "plan", "密谋"],
-["radical", "utmost", "彻底的，根本的"],
-["likelihood", "chance", "可能性"],
-["elusive", "hard", "难懂的，难捉摸的；行踪隐秘的"],
-["contingent", "uncertain", "因情况而异的"],
-["malfunction", "breakdown", "发生故障;不起作用"],
-["peak", "top", "最高峰，顶点 v.使……达到顶峰"],
-["violent", "fierce", "暴力的；猛烈的"],
-["react", "respond", "反应"],
-["toll", "charge", "通行费v.征收"],
-["optimum", "best", "最佳效果 最适宜的"],
-["praise", "commend", "赞扬"],
-["reproduce", "breed", "繁殖"],
-["native", "original", "本国的，土著的；天然的；天赋的"],
-["religious", "sacred", "宗教的；虔诚的"],
-["obtain", "get", "获得"],
-["odour", "smell", "气味"],
-["graphic", "picture", "形象的；图解的"],
-["motif", "theme", "主题；图形"],
-["qualify", "fulfill", "取得资格"],
-["pressing", "urgent", "迫切的"],
-["out of the question", "impossible", "不可能"],
-["rate", "ank;measure", "等级v.评估"],
-["physical", "body", "身体上的；物质的"],
-["erratically", "unpredictably", "不定的，无视规律地"],
-["succumb", "yield", "屈服"],
-["participate", "join", "参加"],
-["odd", "strange", "古怪的"],
-["solicitor", "lawyer", "律师"],
-["evidence", "proof", "迹象；证据"],
+["detain", "hold", ".留住"],
+["supplement", "provision", "补充"],
+["potential", "possibility", "潜能adj.潜在的"],
+["trait", "characteristic, feature, property", "特性，特征"],
+["deficiency", "shortage, defect, weakness", "缺陷，缺点"],
+["designate", "appoint", "指定；指派，标出"],
+["courtship", "mate", "求爱（时期）"],
+["resmble", "like,look,like,be similar to", "像，与……相似"],
+["budget", "fund, financial", "预算"],
+["feasible", "realistic, viable", "可行的"],
+["altitude", "height", "高度，海拔"],
+["curriculum", "syllabus, course of study", "课程"],
+["transmit", "pass, send ,transfer", "传达，传输"],
+["be consistent with", "compatible", "与……一致"],
+["concentrate", "focus", "专心于；集中"],
+["adversity", "troublw", "逆境，不幸"],
+["approach", "method, way", "方法"],
+["demanding", "troublesome", "苛求的"],
+["criticism", "condemn", "评论"],
+["donate", "contribute", "捐赠"],
+["isolate", "inaccessible", "使隔离，使孤立"],
+["allergic", "irritate", "过敏的；对……极讨厌的"],
+["bacteria", "irus, germ, microbe", "细菌"],
+["deadline", "limit", "最后期限"],
+["accelerate", "speed up", "加速，促进；强调"],
+["priority", "preference, preferential", "优先权"],
+["aid", "help", "援助，帮助"],
+["co-operation", "support, work together", "合作，协作"],
+["delay", "postpone", "延期，耽搁"],
+["confidential", "undisclosed, secret, hidden", "机密的,秘密的"],
 ["integrate", "combine, whole", "使……成整体"],
-["marine", "sea", "海产的；航海的；海运的"],
-["ruin", "destroy", "毁灭"],
-["view", "overlook", "看"],
-["portable", "conveyable", "可携带的"],
-["paramount", "principal", "最重要的，主要的"],
-["durable", "lasting", "持久的"],
-["pessimistic", "negative", "悲观的"],
-["prosper", "success", "使成功，使繁荣"],
-["rehearsal", "preparation", "排演；预演；练习"],
-["overcome", "defeat", "克服"],
-["symptom", "sign", "症状，征兆"],
-["relevant", "relative", "相关的"],
-["supersede", "replace", "取代，代替"],
-["valuable", "benefit", "宝贵的，有价值的"],
-["keen", "strong", "热切的；强迫的，强烈的"],
-["paralyse", "cannot move ", "使……麻痹；使……瘫痪"],
-["stimulate", "motivate", "刺激，激励"],
-["poverty", "poor", "贫穷"],
-["suppress", "hold", "抑制，隐瞒"],
-["domain", "field", "领域"],
-["supremacy", "priority", "至高无上，很高的地位"],
-["steer", "manage", "控制，引导"],
-["permit", "allow", "许可证，执照,许可"],
-["transit", "send", "运输；经过v.运送"],
-["transcend", "excel", "胜过，超越"],
-["persuade", "influence", "说服，劝说"],
-["reject", "exclude", "拒绝，排斥，丢弃"],
-["scenic", "beautiful", "风景优美的"],
-["objective", "goal", "目标，目的,客观的"],
-["purify", "clean", "净化"],
-["reduction", "decrease", "下降，减少"],
-["encyclopaedia", "entire range of knowledge", "百科全书"],
+["controversial", "disputable", "有争论的"],
+["conscious", "aware, knowing", "有意识的，神志清醒的"],
+["be liable to", "potential", "易于……"],
+["impair", "damage, diminish, decrease", "削弱，减少"],
+["concur", "agree", "同意"],
+["principle", "rule", "原理"],
+["domestic", "home, local, national", "家庭的；国内的"],
+["unexpectedly", "surprising", "出乎意料的"],
+["convention", "method; tradition", "手法；习俗"],
+["ignore", "neglect, overlook, underestimate", ".忽视，不顾"],
+["blight", "destroy", "损害；枯萎"],
+["application", "utilization", "应用"],
+["exchange", "share, apply A to B", "交换"],
+["coin", "first used, invent", "创造"],
+["aggression", "attack", "侵犯，侵害"],
+["burden", "load", "负担"],
+["conflict", "unharmonious", "冲突，矛盾"],
+["beneficial", "helpful, advantageous, wholesome", "有益的"],
+["legitimate", "legal", "合法的"],
+["distinguish", "separate, differentiate", ".区别，辨别"],
+["calamity", "disaster", "灾难"],
+["rather than*", "but, yet, however, whereas, nonetheless,nevertheless, although, notwithstanding,though, instead", "而非，不是"],
+["vanish", "disappear", "消失，绝迹"],
+["quantity", "number", "量，数量"],
+["threaten", "endanger, jeopardize, risk, hazard", "威胁，危及"],
+["boundary", "barrier", "边界；底线"],
+["superior", "higher, upper", "上级的;优秀的"],
+["bear", "tolerate", "承担；忍受"],
+["fertiliser", "chemical, toxic, unnatural", "化肥，肥料"],
+["damp", "wet", "潮湿的"],
+["array", "order", "排列，大批"],
+["chronic", "lasting", "慢性的，长期性的"],
+["emphasize", "focus on, stress", ".强调，着重"],
+["underlie", "based on, ground, root", "成为……基础"],
+["dynamics", "energy, force, move", "动力学"],
+["considerable", "significant", "相当大的，重要的"],
+["original", "initial, first", "原始的,最初的"],
+["equal", "fair, even", "平等的;相等的；胜任的"],
+["grant", "offer", "拨款；授予"],
+["ancient", "aged, old", "古代的;古老的"],
+["compensate", "make up, offset", "补偿，赔偿"],
+["imitate", "mimic, copy", "模仿"],
+["incentive", "motive, stimulus", "刺激,鼓励;动机"],
+["dazzle", "flash", "使目眩；使……眼花"],
+["retain", "maintain", "记住"],
+["criteria", "standard", "标准"],
+["mortality", "death", "死亡率"],
+["confer", "grant", "授予，给予"],
+["thanks to", "stem from，derive，owing to，due to,according to, because of, on account of,as a result of, leading to, because, since,for, in that, as, therefore, hence", "由于，幸亏"],
+["artificial", "synthetic, man-made", "人造的，仿造的"],
+["adapt to", "fit, suit", "使适应"],
+["crisis", "risk", "危机"],
+["delivery", "send", "递送"],
+["curb", "restrict", "限制，抑制"],
+["consult", "ask for advice", "查阅,商量,请教,"],
+["limitation", "restriction", "限制"],
+["analyze", "examine, diagnose", "分析，解释"],
+["peripheral", "unimportant, minor", "外围的"],
+["crash", "collapse", "碰撞"],
+["commute", "travel", "通勤；用……交换"],
+["therapy", "treatment", "治疗，理疗"],
+["adjust", "change, modify, shift, alter", "调整，使适合"],
+["conservative", "traditional", "保守的"],
+["military", "weapon, army", "军事的"],
+["primary", "principle, main", "主要的"],
+["vanish", "disappear", "消失，绝迹"],
+["signal", "symbol, mark, sign", "信号"],
+["exclusive", "only", "独有的；排外的；专一的"],
+["approve", "agree", "批准"],
+["faculty", "ability", "能力，才能；全体教员"],
+["cognitive", "mental", "认知的"],
+["surrounding", "setting, environment", "环境"],
+["cater", "serve", "迎合；满足需求"],
+["swift", "quick, rapid", "迅速的，敏捷的，立刻的"],
+["fundamental", "rudimentary, preliminary, basic", "基本的，基础的"],
+["survive", "remain", "存活，幸存"],
+["constrain", "stop, control", "束缚，限制"],
+["be subject to", "face", "受…...支配,受…...限制"],
+["enormous", "massive, large", "庞大的,巨大的"],
+["guarantee", "assure", "保证，担保"],
+["co-ordinate", "organize, harmonize", "使……协调"],
+["abandon", "quit, give up, forsake, derelict", "放弃"],
+["practice", "method, exercise", "实行；练习"],
+["accumulate", "gather", "积累，积聚"],
+["extinct", "dieout, lost", "灭绝"],
+["recognize", "perceive,acknowledge,realize,appreciate,admit ,identify, comprehend, understand, know", "认出，识别；承认"],
+["commitment", "engagement", "承诺，许诺，义务；致力"],
+["determine", "decide", "决定"],
+["witness", "view, see", "见证，证据；目击者"],
+["erode", "rust, damage", "侵蚀"],
+["pattern", "formation", "模式"],
+["demographic", "population statistic", "人口统计学的；人口学"],
+["bungle", "mishandle", "搞糟，拙劣地工作"],
+["communal", "public", "公共的，公社的"],
+["avoid", "escape, evitable", "避免"],
+["conceal", "hide", "隐藏；隐瞒"],
+["attempt", "try, test", "试图，尝试"],
+["expertise", "knowledge, skill", "专门技术"],
+["inherit", "receive", "继承"],
+["expertise", "knowledge, skill", "专门技术"],
+["specific", "detailed, particular", "明确的；特殊的"],
+["civic", "municipal", "市民的"],
+["comply with", "obey", "照做，遵守"],
+["settle", "fix", "解决；定居，稳定"],
+["halt", "stop, quit", "停止"],
+["agreeable", "pleasant", "令人愉快的；合适的；和蔼可亲的"],
+["loss", "waste, gone", "少；亏损；失败；遗失的"],
+["compare", "contrast", "与……相比较"],
+["criminal", "conviction", "罪犯，犯人"],
+["magnetic", "attractive", "有磁性的"],
+["rely on", "depend on", "依靠，依赖"],
+["diversity", "variety, difference", "多样性，差异"],
+["component", "proportion", "成分，要素"],
+["prompt", "initiate, immediately", "促进，激起"],
+["addictive", "habit", "上瘾的"],
+["detect", "find, look for, seek, search", "查明，发现"],
+["alternative", "substitute", "供替代的，供选择的n.替代品"],
+["innate", "built-in, inborn", "天生的；内在的，直觉的"],
+["vicinity", "neighbourhood, nearby", "邻近，附近"],
+["dental", "teeth", "牙科的，牙齿的"],
+["cue", "hint, clue", "线索"],
+["comment", "remark", "n.评论；意见 v.评论"],
+["option", "choice", "选择"],
+["contingent", "uncertain", "因情况而异的"],
+["correlation", "link", "相关，关联"],
+["hinder", "impede, prevent, deter, obstacle", "阻碍"],
+["democratic", "republic", "民主的"],
+["prefer to", "rather", "更喜欢"],
+["immunity", "resistance", "免疫力"],
+["confuse", "puzzle", "使混乱，使迷惑"],
+["differ", "vary", "使……相异；使……不同"],
+["credibility", "reliance", "可信性"],
+["assign", "allocate", "分配，指派"],
+["attitude", "opinion", "看法，态度"],
+["stable", "constant, unchanged", "稳定的"],
+["catastrophic", "disastrous", "灾难的"],
+["induce", "cause, lead to", "引起，引诱"],
+["certify", "verify", "证明,保证"],
+["depression", "frustration", "抑郁，沮丧"],
+["imperative", "compelling, necessary, urgent", "必要的，紧急的"],
+["secrete", "discharge, exude", ".分泌"],
+["exaggerate", "overstate", "夸大，夸张"],
+["minimize", "reduce, lessen", "最小化，使……减少到最少"],
+["fragile", "vulnerable", "脆弱的"],
+["authority", "government", "当局，权威"],
+["sophisticate", "complicate", "使复杂"],
   ];
 
   let index = 0;
